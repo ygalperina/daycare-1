@@ -1,0 +1,24 @@
+{
+  "name": "daycare-1",
+  "version": "1.0.0",
+  "description": "daycare-1/ ├── index.html          (Home page) ├── about.html          (About Us) ├── contact.html        (Contact Us) ├── reviews.html        (Reviews) ├── css/ │   └── style.css       (Shared styles) └── js/ └── script.js       (Shared JS for navigation and forms)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ygalperina/daycare-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ygalperina/daycare-1/issues"
+  },
+  "homepage": "https://github.com/ygalperina/daycare-1#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
