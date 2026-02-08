@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(),microphone=(),camera=()">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://api.emailjs.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * data: https: blob:; connect-src https://api.emailjs.com; frame-ancestors 'none';">
   <title>Contact Us - Little Stars Daycare</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -24,6 +28,7 @@
 <section class="container">
     <h2>Get In Touch</h2>
     <form>
+      <input type="text" name="honeypot" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px; width: 1px; height: 1px;">
       <label for="name">Your Name:</label>
       <input type="text" id="name" name="name" required>
       

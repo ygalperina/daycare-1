@@ -14,7 +14,7 @@
   document.head.appendChild(script);
 })();
 
-// Smooth scrolling (unchanged)
+// Smooth scrolling
 document.addEventListener('DOMContentLoaded', function() {
   const links = document.querySelectorAll('nav a[href^="#"]');
   links.forEach(link => {
@@ -27,38 +27,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Form submission with debug
+  // Secure form handling (only if form exists)
   const form = document.querySelector('form');
-  if (form) {
+  if (form && typeof emailjs !== 'undefined') {
+    emailjs.init('YOUR_PUBLIC_KEY');  // Replace with your EmailJS public key
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       
-      const name = document.querySelector('input[name="name"]').value;
-      const email = document.querySelector('input[name="email"]').value;
-      const message = document.querySelector('textarea[name="message"]').value;
-      
-      console.log('Form data:', { name, email, message });  // Debug log
-      
-      if (name && email && message) {
-        console.log('Sending via EmailJS...');
-        emailjs.send('service_w65e2fv', 'template_25rka9n', {  // ← REPLACE THESE
-          name: name,
-          email: email,
-          message: message
-        })
-        .then(function(response) {
-          console.log('SUCCESS:', response.status, response.text);
-          alert('Thank you! Your message has been sent. ⭐ Check your email.');
-          form.reset();
-        }, function(error) {
-          console.error('EmailJS ERROR:', error);
-          alert('Send failed. Check console (F12) or email directly.');
-        });
-      } else {
-        alert('Please fill all fields.');
+      const honeypot = document.querySelector('input[name="honeypot"]').value;
+      if (honeypot) {
+        alert('Message not sent.');
+        return false;
       }
+      
+      const name = document.querySelector('input[name="name"]').value.trim();
+      const email = document.querySelector('input[name="email"]').value.trim();
+      const message = document.querySelector('textarea[name="message"]').value.trim();
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+      }
+      
+      if (!name || !email || !message) {
+        alert('Please fill all fields.');
+        return false;
+      }
+      
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {  // Replace with your service ID and template ID
+        name: name,
+        email: email,
+        message: message
+      })
+      .then(function(response) {
+        alert('Thank you! Your message has been sent. ⭐');
+        form.reset();
+      }, function(error) {
+        console.error('EmailJS ERROR:', error);
+        alert('Send failed. Please try again or contact us directly.');
+      });
     });
-  } else {
-    console.error('No form found!');
   }
 });
